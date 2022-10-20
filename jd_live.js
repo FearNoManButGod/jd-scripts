@@ -4,7 +4,20 @@
 活动入口：京东APP首页-京东直播
 
 定时随机，建议跑2次~黑号插肩
+===================quantumultx================
+[task_local]
+#京东直播
+13 10,13 * * * jd_live.js, tag=京东直播, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
+=====================Loon================
+[Script]
+cron "13 10,13 * * *" script-path=jd_live.js, tag=京东直播
+
+====================Surge================
+京东直播 = type=cron,cronexp="13 10,13 * * *",wake-system=1,timeout=3600,script-path=jd_live.js
+
+============小火箭=========
+京东直播 = type=cron,script-path=jd_live.js, cronexpr="13 10,13 * * *", timeout=3600, enable=true
  */
 
 const $ = new Env('京东直播');

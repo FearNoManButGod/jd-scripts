@@ -1,9 +1,8 @@
 /*
 金榜创造营
 活动入口：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
-活动时间：2021-05-21至2021-12-31
-脚本更新时间：2021-05-28 14:20
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+
+定时随机~~~~
 ===================quantumultx================
 [task_local]
 #金榜创造营
@@ -18,6 +17,7 @@ cron "13 1,22 * * *" script-path=jd_gold_creator.js, tag=金榜创造营
 
 ============小火箭=========
 金榜创造营 = type=cron,script-path=jd_gold_creator.js, cronexpr="13 1,22 * * *", timeout=3600, enable=true
+
  */
 const $ = new Env('金榜创造营');
 const notify = $.isNode() ? require('./sendNotify') : '';
