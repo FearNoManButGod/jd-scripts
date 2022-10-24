@@ -6,7 +6,7 @@ import requests  # 导入requests包
 from datetime import datetime, timedelta
 
 # ql配置文件路径
-path = '/root/ql/config/config.sh'
+path = '/ql/config/config.sh'
 # ql要修改行的行数
 line = int(124)
 # 获取json数据  并转换成字典
