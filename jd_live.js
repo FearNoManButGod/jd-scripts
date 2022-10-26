@@ -19,7 +19,6 @@ cron "13 10,13 * * *" script-path=jd_live.js, tag=京东直播
 ============小火箭=========
 京东直播 = type=cron,script-path=jd_live.js, cronexpr="13 10,13 * * *", timeout=3600, enable=true
  */
-
 const $ = new Env('京东直播');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
