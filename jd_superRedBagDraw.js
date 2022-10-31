@@ -133,6 +133,7 @@ async function doInteractiveAssignment() {
             try {
                 //console.log(data)
                 if (err) {
+                    msg = 2
                     console.log('doInteractiveAssignment API请求失败，请检查网路重试')
                 } else {
                     res = JSON.parse(data)
