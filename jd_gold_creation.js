@@ -3,21 +3,6 @@
 活动入口：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
 
 定时随机~~~~
-===================quantumultx================
-[task_local]
-#金榜创造营
-13 1,22 * * * jd_gold_creator.js, tag=金榜创造营, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
-=====================Loon================
-[Script]
-cron "13 1,22 * * *" script-path=jd_gold_creator.js, tag=金榜创造营
-
-====================Surge================
-金榜创造营 = type=cron,cronexp="13 1,22 * * *",wake-system=1,timeout=3600,script-path=jd_gold_creator.js
-
-============小火箭=========
-金榜创造营 = type=cron,script-path=jd_gold_creator.js, cronexpr="13 1,22 * * *", timeout=3600, enable=true
-
  */
 const $ = new Env('金榜创造营');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -201,7 +186,9 @@ async function doTask(subTitleId, taskId, batchId) {
     "itemId": "1",
     "rankId": $.skuList[randIndex]['rankId'],
     "type": 1,
-    batchId
+    batchId,
+	"version": "2"
+		
   };
 	await $.wait(2000);
   await goldCreatorDoTask(body);
@@ -211,7 +198,7 @@ async function doTask2(batchId) {
     task = task.filter(vo => !!vo && vo['taskStatus'] === 1);
     for (let item of task) {
       console.log(`\n做额外任务：${item['taskName']}`)
-      const body = {"taskId": item['taskId'], "itemId": item['taskItemInfo']['itemId'], "type": item['taskType'], batchId};
+      const body = {"taskId": item['taskId'], "itemId": item['taskItemInfo']['itemId'], "type": item['taskType'], batchId, "version":"2"};
       if (item['taskType'] === 1) {
         body['type'] = 2;
       }
@@ -284,13 +271,8 @@ function goldCreatorPublish() {
 }
 function taskUrl(function_id, body = {}) {
   return {
-    url: `${JD_API_HOST}?functionId=${function_id}&body=${escape(JSON.stringify(body))}&appid=content_ecology&clientVersion=10.0.0&client=wh5&eufv=false&uuid=`,
+    url: `${JD_API_HOST}?functionId=${function_id}&body=${escape(JSON.stringify(body))}&appid=content_ecology&clientVersion=11.3.0&client=wh5&jsonp=`,
     headers: {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Accept-Language": "zh-cn",
-      "Connection": "keep-alive",
-      "Content-Type": "application/x-www-form-urlencoded",
       "Host": "api.m.jd.com",
       "Referer": "https://h5.m.jd.com/",
       "Cookie": cookie,

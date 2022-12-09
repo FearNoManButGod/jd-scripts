@@ -7,11 +7,11 @@
 				 JD_LZ_OPEN  //关闭LZ相关活动运行
 
 默认助力第一个号
-cron:7 7 7 7 7
+cron:1 1 1 1 *
 ============Quantumultx===============
 [task_local]
 LZ店铺游戏
-7 7 7 7 7 jdjk_wxSecond.js, tag=读秒拼手速通用活动, enabled=true
+1 1 1 1 * jd_wxSecond.js, tag=读秒拼手速通用活动, enabled=true
 
 */
 
