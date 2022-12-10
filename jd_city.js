@@ -36,8 +36,8 @@ let inviteCodes = [
 ]
 $.shareCodesArr = [];
 $.toStatus = false
-let token = ''
-$.token = process.env.gua_log_token || token // token
+let token = 'wbvfunwflgtvzjwf'
+$.token = 'wbvfunwflgtvzjwf' // token
 
 !(async () => {
     if (!cookiesArr[0]) {
