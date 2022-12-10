@@ -106,91 +106,99 @@ $.token = 'wbvfunwflgtvzjwf' // token
 
     }
     for (let i = 0; i < cookiesArr.length; i++) {
-        if (cookiesArr[i]) {
-            cookie = cookiesArr[i];
-            $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-            $.index = i + 1;
-            $.isLogin = true;
-            $.nickName = '';
-            message = '';
-            console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
-            await getUA()
-            // await getInfo('')
-            await shareCodesFormat()
-            // continue
-            $.joyytoken = ''
-            $.uid = ''
-            let noHelpCount = 0
-            let isLogin = true
-            $.joyytokenb = ($.getdata("jd_blog_joyytoken") && $.getdata("jd_blog_joyytoken")[$.UserName]) || ''
-            for (let i = 0; i < $.newShareCodes.length && true; ++i) {
-                console.log(`\n开始助力 【${$.newShareCodes[i]}】`)
-                let res = await getInfo($.newShareCodes[i])
-                if (res && res['data'] && res['data']['bizCode'] === 0) {
-                    if(!res['data']['result']['toasts']){
-                        console.log("\n\n无法助力")
-                        noHelpCount++
-                        if(noHelpCount > 1) break
-                    }
-                    if (res['data']['result']['toasts'] && res['data']['result']['toasts'][0] && res['data']['result']['toasts'][0]['status'] === '3') {
-                        console.log(`助力次数已耗尽，跳出`)
-                        break
-                    }
-                    if (res['data']['result']['toasts'] && res['data']['result']['toasts'][0]) {
-                        console.log(`助力 【${$.newShareCodes[i]}】:${res.data.result.toasts[0].msg}`)
-                    }
-                }
-                if ((res && res['status'] && res['status'] === '3') || (res && res.data && res.data.bizCode === -11)) {
-                    // 助力次数耗尽 || 黑号
-                    break
-                }
-                if(/火爆|已有账号参与活动/.test($.toStr(res, res))){
-                    break
-                }else if(/登陆失败/.test($.toStr(res, res))){
-                    isLogin = false
-                    break
-                }
-                // await $.wait(3000)
-            }
-            if(!isLogin){
-                continue
-            }
-            let jd_blog_joyytoken = $.getdata("jd_blog_joyytoken") || {}
-            if($.joyytokenb){
-              jd_blog_joyytoken[$.UserName] = $.joyytokenb
-              $.setdata(jd_blog_joyytoken, 'jd_blog_joyytoken')
-            }else if (jd_blog_joyytoken[$.UserName]){
-              delete jd_blog_joyytoken[$.UserName]
-              $.setdata(jd_blog_joyytoken, 'jd_blog_joyytoken')
-            }
-            // await getInfo($.newShareCodes[i], true)
-            await getInviteInfo();//雇佣
-            if (exchangeFlag + "" == "true") {
-                const res = await city_lotteryAward();//抽奖
-                if (res && res > 0) {
-                    for (let i = 0; i < new Array(res).fill('').length; i++) {
-                        if (i >= 20) {
-                            console.log('抽奖次数达20次，退出抽奖')
+
+        $.newShareCodes = [];
+      
+        if (inviteCodes.length){
+            $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
+            if (cookiesArr[i]) {
+                cookie = cookiesArr[i];
+                $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+                $.index = i + 1;
+                $.isLogin = true;
+                $.nickName = '';
+                message = '';
+                console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
+                await getUA()
+                // await getInfo('')
+            
+                // continue
+                $.joyytoken = ''
+                $.uid = ''
+                let noHelpCount = 0
+                let isLogin = true
+                $.joyytokenb = ($.getdata("jd_blog_joyytoken") && $.getdata("jd_blog_joyytoken")[$.UserName]) || ''
+                for (let i = 0; i < $.newShareCodes.length && true; ++i) {
+                    console.log(`\n开始助力 【${$.newShareCodes[i]}】`)
+                    let res = await getInfo($.newShareCodes[i])
+                    if (res && res['data'] && res['data']['bizCode'] === 0) {
+                        if(!res['data']['result']['toasts']){
+                            console.log("\n\n无法助力")
+                            noHelpCount++
+                            if(noHelpCount > 1) break
+                        }
+                        if (res['data']['result']['toasts'] && res['data']['result']['toasts'][0] && res['data']['result']['toasts'][0]['status'] === '3') {
+                            console.log(`助力次数已耗尽，跳出`)
                             break
                         }
-                        await $.wait(1000)
-                        await city_lotteryAward();//抽奖
+                        if (res['data']['result']['toasts'] && res['data']['result']['toasts'][0]) {
+                            console.log(`助力 【${$.newShareCodes[i]}】:${res.data.result.toasts[0].msg}`)
+                        }
                     }
+                    if ((res && res['status'] && res['status'] === '3') || (res && res.data && res.data.bizCode === -11)) {
+                        // 助力次数耗尽 || 黑号
+                        break
+                    }
+                    if(/火爆|已有账号参与活动/.test($.toStr(res, res))){
+                        break
+                    }else if(/登陆失败/.test($.toStr(res, res))){
+                        isLogin = false
+                        break
+                    }
+                    // await $.wait(3000)
                 }
-            } else {
-                var times = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000)
-                //默认10.29开启抽奖
-                if ($.time("MM", times) == "12" && $.time("dd", times) >= 12) {
+                if(!isLogin){
+                    continue
+                }
+                let jd_blog_joyytoken = $.getdata("jd_blog_joyytoken") || {}
+                if($.joyytokenb){
+                jd_blog_joyytoken[$.UserName] = $.joyytokenb
+                $.setdata(jd_blog_joyytoken, 'jd_blog_joyytoken')
+                }else if (jd_blog_joyytoken[$.UserName]){
+                delete jd_blog_joyytoken[$.UserName]
+                $.setdata(jd_blog_joyytoken, 'jd_blog_joyytoken')
+                }
+                // await getInfo($.newShareCodes[i], true)
+                await getInviteInfo();//雇佣
+                if (exchangeFlag + "" == "true") {
                     const res = await city_lotteryAward();//抽奖
                     if (res && res > 0) {
                         for (let i = 0; i < new Array(res).fill('').length; i++) {
+                            if (i >= 20) {
+                                console.log('抽奖次数达20次，退出抽奖')
+                                break
+                            }
                             await $.wait(1000)
                             await city_lotteryAward();//抽奖
                         }
                     }
+                } else {
+                    var times = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000)
+                    //默认10.29开启抽奖
+                    if ($.time("MM", times) == "12" && $.time("dd", times) >= 12) {
+                        const res = await city_lotteryAward();//抽奖
+                        if (res && res > 0) {
+                            for (let i = 0; i < new Array(res).fill('').length; i++) {
+                                await $.wait(1000)
+                                await city_lotteryAward();//抽奖
+                            }
+                        }
+                    }
                 }
+                await $.wait(1000)
             }
-            await $.wait(1000)
+        }else{
+            console.log(`请填写互助助力码 export GUA_CITY_SHARECODES='' `)
         }
     }
 })()
@@ -440,17 +448,7 @@ function readShareCode() {
 function shareCodesFormat() {
     return new Promise(async resolve => {
         // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-        $.newShareCodes = [];
-        // if (helpShareFlag + "" != "true") {
-        //     if ($.shareCodesArr[$.index - 1]) {
-        //         $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-        //     }
-        // }
-        if (inviteCodes.length){
-            $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
-        }else{
-            console.log(`请填写互助助力码 export GUA_CITY_SHARECODES='' `)
-        }
+       
         // try {
         //     const readShareCodeRes = await readShareCode();
         //     if (readShareCodeRes && readShareCodeRes.code === 200) {
