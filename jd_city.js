@@ -446,7 +446,11 @@ function shareCodesFormat() {
         //         $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
         //     }
         // }
-        if (inviteCodes.length) $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
+        if (inviteCodes.length){
+            $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
+        }else{
+            console.log(`请填写互助助力码`)
+        }
         // try {
         //     const readShareCodeRes = await readShareCode();
         //     if (readShareCodeRes && readShareCodeRes.code === 200) {
