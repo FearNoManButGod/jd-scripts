@@ -105,12 +105,10 @@ $.token = 'wbvfunwflgtvzjwf' // token
         }
 
     }
-    for (let i = 0; i < cookiesArr.length; i++) {
-
-        $.newShareCodes = [];
-      
-        if (inviteCodes.length){
-            $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
+    $.newShareCodes = [];
+    $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
+    if (inviteCodes.length){
+        for (let i = 0; i < cookiesArr.length; i++) {
             if (cookiesArr[i]) {
                 cookie = cookiesArr[i];
                 $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
@@ -197,9 +195,9 @@ $.token = 'wbvfunwflgtvzjwf' // token
                 }
                 await $.wait(1000)
             }
-        }else{
-            console.log(`请填写互助助力码 export GUA_CITY_SHARECODES='' `)
         }
+    }else{
+        console.log(`请填写互助助力码 export GUA_CITY_SHARECODES='' `)
     }
 })()
     .catch((e) => {
