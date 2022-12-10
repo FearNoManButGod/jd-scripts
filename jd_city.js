@@ -449,7 +449,7 @@ function shareCodesFormat() {
         if (inviteCodes.length){
             $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
         }else{
-            console.log(`请填写互助助力码`)
+            console.log(`请填写互助助力码 export GUA_CITY_SHARECODES='' `)
         }
         // try {
         //     const readShareCodeRes = await readShareCode();
