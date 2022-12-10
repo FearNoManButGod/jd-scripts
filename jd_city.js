@@ -447,14 +447,14 @@ function shareCodesFormat() {
             }
         }
         if (inviteCodes.length) $.newShareCodes = [...inviteCodes, ...$.newShareCodes]
-        try {
-            const readShareCodeRes = await readShareCode();
-            if (readShareCodeRes && readShareCodeRes.code === 200) {
-              $.newShareCodes = [...new Set([...$.newShareCodes, ...([])])];
-            }
-        } catch (e) {
-            console.log(e);
-        }
+        // try {
+        //     const readShareCodeRes = await readShareCode();
+        //     if (readShareCodeRes && readShareCodeRes.code === 200) {
+        //       $.newShareCodes = [...new Set([...$.newShareCodes, ...([])])];
+        //     }
+        // } catch (e) {
+        //     console.log(e);
+        // }
         console.log(`第${$.index}个京东账号将要助力的好友(前10条数据)${JSON.stringify($.newShareCodes.slice(0,10))}`)
         resolve();
     })
