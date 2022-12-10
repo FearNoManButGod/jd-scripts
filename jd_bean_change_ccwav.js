@@ -276,7 +276,7 @@ if(DisableIndex!=-1){
 }
 
 //京喜牧场
-let EnableJxMC=true;
+let EnableJxMC=false;
 DisableIndex= strDisableList.findIndex((item) => item === "京喜牧场");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭京喜牧场查询");
@@ -343,7 +343,7 @@ if(DisableIndex!=-1){
 }
 
 //汪汪赛跑
-let EnableJoyRun=true;
+let EnableJoyRun=false;
 DisableIndex=strDisableList.findIndex((item) => item === "汪汪赛跑");
 if(DisableIndex!=-1){
 	console.log("检测到设定关闭汪汪赛跑查询");
@@ -533,7 +533,7 @@ if(DisableIndex!=-1){
 
 						await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 							url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-						}, '\n\n本通知 By ccwav Mod',TempMessage)
+						}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
 					}
 					if ($.isNode() && allMessageMonth) {
 						await notify.sendNotify(`京东月资产变动`, `${allMessageMonth}`, {
@@ -613,7 +613,7 @@ if(DisableIndex!=-1){
 				
 				await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 					url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-				}, '\n\n本通知 By ccwav Mod',TempMessage)
+				}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
 			}
 			if ($.isNode() && allMessageMonth) {
 				await notify.sendNotify(`京东月资产变动`, `${allMessageMonth}`, {
@@ -629,7 +629,7 @@ if(DisableIndex!=-1){
 				allMessageGp2=strAllNotify+`\n`+allMessageGp2;
 			await notify.sendNotify(`${$.name}#2`, `${allMessageGp2}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By ccwav Mod',TempMessage)
+			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageGp3) {
@@ -638,7 +638,7 @@ if(DisableIndex!=-1){
 				allMessageGp3=strAllNotify+`\n`+allMessageGp3;
 			await notify.sendNotify(`${$.name}#3`, `${allMessageGp3}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By ccwav Mod',TempMessage)
+			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessageGp4) {
@@ -647,7 +647,7 @@ if(DisableIndex!=-1){
 				allMessageGp4=strAllNotify+`\n`+allMessageGp4;
 			await notify.sendNotify(`${$.name}#4`, `${allMessageGp4}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By ccwav Mod',TempMessage)
+			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
 			await $.wait(10 * 1000);
 		}
 		if ($.isNode() && allMessage) {
@@ -657,7 +657,7 @@ if(DisableIndex!=-1){
 			
 			await notify.sendNotify(`${$.name}`, `${allMessage}`, {
 				url: `https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean`
-			}, '\n\n本通知 By ccwav Mod',TempMessage)
+			}, '\n\n本通知 By https://github.com/KingRan/KR',TempMessage)
 			await $.wait(10 * 1000);
 		}
 
@@ -759,9 +759,16 @@ async function showMsg() {
 		
 	if ($.JingXiang) {
 		if ($.isRealNameAuth)
-			ReturnMessageTitle += `(已实名)\n`;
+			if (cookie.includes("app_open"))
+				ReturnMessageTitle += `(wskey已实名)\n`;
+			else
+				ReturnMessageTitle += `(已实名)\n`;
 		else
-			ReturnMessageTitle += `(未实名)\n`;
+			if (cookie.includes("app_open"))
+				ReturnMessageTitle += `(wskey未实名)\n`;
+			else
+				ReturnMessageTitle += `(未实名)\n`;
+			
 	    ReturnMessage += `【账号信息】`;
 	    if ($.isPlusVip) {
 	        ReturnMessage += `Plus会员`;
@@ -1133,9 +1140,16 @@ async function showMsg() {
 		var strTitle="京东资产变动";
 		if($.JingXiang){
 			if ($.isRealNameAuth)
-				ReturnMessage=`【账号名称】${$.nickName || $.UserName}(已实名)\n`+ReturnMessage;				
+				if (cookie.includes("app_open"))
+					ReturnMessage=`【账号名称】${$.nickName || $.UserName}(wskey已实名)\n`+ReturnMessage;
+				else
+					ReturnMessage=`【账号名称】${$.nickName || $.UserName}(已实名)\n`+ReturnMessage;
 			else
-				ReturnMessage=`【账号名称】${$.nickName || $.UserName}(未实名)\n`+ReturnMessage;				
+				if (cookie.includes("app_open"))
+					ReturnMessage=`【账号名称】${$.nickName || $.UserName}(wskey未实名)\n`+ReturnMessage;
+				else
+					ReturnMessage=`【账号名称】${$.nickName || $.UserName}(未实名)\n`+ReturnMessage;
+			
 		}else{
 			ReturnMessage=`【账号名称】${$.nickName || $.UserName}\n`+ReturnMessage;
 		}
@@ -1152,7 +1166,7 @@ async function showMsg() {
 		if(strAllNotify)
 			ReturnMessage=strAllNotify+`\n`+ReturnMessage;
 		
-		await notify.sendNotifybyWxPucher(strTitle, `${ReturnMessage}`, `${$.UserName}`,'\n\n本通知 By ccwav Mod',strsummary);
+		await notify.sendNotifybyWxPucher(strTitle, `${ReturnMessage}`, `${$.UserName}`,'\n\n本通知 By https://github.com/KingRan/KR',strsummary);
 	}
 
 	//$.msg($.name, '', ReturnMessage , {"open-url": "https://bean.m.jd.com/beanDetail/index.action?resourceValue=bean"});
@@ -1854,7 +1868,7 @@ function getCoupon() {
 					//console.log(useable[i]);
                     if (useable[i].limitStr.indexOf('全品类') > -1) {
                         $.beginTime = useable[i].beginTime;
-                        if ($.beginTime < new Date().getTime() && useable[i].quota < 20 && useable[i].coupontype === 1) {                           
+                        if ($.beginTime < new Date().getTime() && useable[i].quota <= 100 && useable[i].coupontype === 1) {                           
 							//$.couponEndTime = new Date(parseInt(useable[i].endTime)).Format('yyyy-MM-dd');
                             $.couponName = useable[i].limitStr;
 							if (useable[i].platFormInfo) 
