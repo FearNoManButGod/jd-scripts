@@ -4,11 +4,11 @@
 					https://cjhy-isv.isvjcloud.com/wxShopGift/activity?activityId=<活动id>
 环境变量：jd_wxShopGift_activityUrl // 活动链接
 
-cron:7 7 7 7 7
+cron:1 1 1 1 *
 ============Quantumultx===============
 [task_local]
 #店铺礼包特效
-7 7 7 7 7 jdjk_wxShopGift.js, tag=店铺礼包特效, enabled=true
+1 1 1 1 * jd_wxShopGift.js, tag=店铺礼包特效, enabled=true
 
 */
 
