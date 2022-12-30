@@ -21,9 +21,9 @@ export JD_nhj_redTimes="0"
 
 */
 
-let rebateCodes = ''; // 返利变量
+let rebateCodes = 'mtFADNS'; // 返利变量
 let rebatePin = ''; // 助力pin变量
-let redTimes = 0 // 领取次数
+let redTimes = 1 // 领取次数
 
 
 const $ = new Env('年货节red');
