@@ -1,6 +1,12 @@
+/*
+京东保价
+每天随机运行一次, 无需指定特定时间
+============Quantumultx===============
+ */
+
+let $ = new common.env('京东保价');
 let common = require("./function/common");
 let jsdom = require("jsdom");
-let $ = new common.env('京东保价');
 let min = 1,
     help = $.config[$.filename(__filename)] || Math.min(min, $.config.JdMain) || min;
 $.setOptions({
